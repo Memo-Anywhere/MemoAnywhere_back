@@ -42,7 +42,7 @@ CREATE TABLE `UserGroup` (
    `group_id`   bigint   NOT NULL,
    `group_description`   text   NULL,
    `group_color`   varchar(10)   NULL,
-   FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE,
+   foreign key (user_id) references `User`(user_id) on delete cascade,
    foreign key(group_id) references `Group`(group_id) on delete cascade
 );
 
