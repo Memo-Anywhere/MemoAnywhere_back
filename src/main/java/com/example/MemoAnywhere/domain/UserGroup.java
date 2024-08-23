@@ -24,4 +24,10 @@ public class UserGroup {
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = false)
     private Group group;
+
+    @Column(name = "group_color", length = 7) // 색상 코드(예: #FFFFFF)를 위한 필드
+    private String groupColor;
+
+    @Column(name = "group_description", length = 255)
+    private String groupDescription;
 }
