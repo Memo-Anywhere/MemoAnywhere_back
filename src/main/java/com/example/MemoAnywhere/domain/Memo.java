@@ -2,6 +2,7 @@ package com.example.MemoAnywhere.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Memo")
@@ -26,4 +27,7 @@ public class Memo {
 
     @Column(nullable = false, length = 500)
     private String content;
+
+    @Column(nullable = false)
+    private LocalDate date;
 }

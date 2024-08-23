@@ -1,14 +1,23 @@
 package com.example.MemoAnywhere.dto;
 
-import lombok.AllArgsConstructor;
+import com.example.MemoAnywhere.domain.UserGroup;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserGroupDTO {
     private Long userGroupId;
     private Long userId;
     private Long groupId;
+    private String groupColor;
+    private String groupDescription;
+
+    public static UserGroupDTO of(UserGroup userGroup) {
+        UserGroupDTO usergroupDTO = new UserGroupDTO();
+        usergroupDTO.setUserGroupId(userGroup.getUserGroupId());
+        usergroupDTO.setUserId(userGroup.getUser().getUserId());
+        usergroupDTO.setGroupId(userGroup.getGroup().getGroupId());
+        usergroupDTO.setGroupColor(userGroup.getGroupColor());
+        usergroupDTO.setGroupDescription(userGroup.getGroupDescription());
+        return usergroupDTO;
+    }
 }
