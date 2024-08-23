@@ -25,4 +25,8 @@ public class Group {
     // Group과 UserGroup 사이의 일대다 관계
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserGroup> userGroups;
+
+    // Group과 CalendarEvent 사이의 일대다 관계
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CalendarEvent> calendarEvents;
 }
