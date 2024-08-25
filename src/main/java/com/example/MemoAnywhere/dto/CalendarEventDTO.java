@@ -21,7 +21,7 @@ public class CalendarEventDTO {
     public static CalendarEventDTO of(CalendarEvent event) {
         CalendarEventDTO calendareventDTO = new CalendarEventDTO();
         calendareventDTO.setEventId(event.getEventId());
-        calendareventDTO.setGroupId(event.getGroup().getGroupId());
+        calendareventDTO.setGroupId(event.getGroup_id());
         calendareventDTO.setDate(event.getDate());
         calendareventDTO.setTask(event.getTask());
         calendareventDTO.setStartTime(event.getStartTime());
