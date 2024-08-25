@@ -20,7 +20,7 @@ public class Memo {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Long user_id;
 
     @Column(nullable = false, length = 100)
     private String title;

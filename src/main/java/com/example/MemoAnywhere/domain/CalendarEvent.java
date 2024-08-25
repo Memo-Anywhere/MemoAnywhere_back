@@ -22,7 +22,7 @@ public class CalendarEvent {
 
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = false)
-    private Group group;
+    private Long group_id;
     // JoinColumn은 JPA에서 외래키를 명시적으로 설정하기 위해 사용됨
 
     @Column(nullable = false)
