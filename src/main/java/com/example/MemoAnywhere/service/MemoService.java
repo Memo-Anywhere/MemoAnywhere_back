@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +56,13 @@ public class MemoService {
         } else {
             return false; // 메모가 존재하지 않을 경우 false 반환
         }
+    }
+
+    public List<MemoDTO> getAllMemos() {   // 모든 메모 가져오기
+        List<Memo> memos = memoRepository.findAll();  // DB에서 모든 메모를 가져옴
+        return memos.stream()
+                .map(MemoDTO::of)  // Memo 엔티티를 MemoDTO로 변환
+                .collect(Collectors.toList());  // 리스트로 변환하여 반환
     }
 
 }
