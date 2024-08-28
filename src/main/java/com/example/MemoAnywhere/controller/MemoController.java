@@ -18,7 +18,7 @@ public class MemoController {
     private final MemoService memoService;
 
     // 메모 추가
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<MemoDTO> createMemo(@RequestBody MemoDTO memoDTO) {
         MemoDTO createdMemo =
                 memoService.createMemo(memoDTO.getTitle(),
@@ -28,7 +28,7 @@ public class MemoController {
     }
 
     // 메모 업데이트
-    @PutMapping("/{memoId}")
+    @PutMapping("/update/{memoId}")
     public ResponseEntity<MemoDTO> updateMemo(@PathVariable Long memoId, @RequestBody MemoDTO memoDTO) {
         MemoDTO updatedMemo =
                 memoService.updateMemo(memoId,
@@ -46,7 +46,7 @@ public class MemoController {
     }
 
     // 메모 삭제
-    @DeleteMapping("/{memoId}")
+    @DeleteMapping("delete/{memoId}")
     public ResponseEntity<Void> deleteMemoById(@PathVariable Long memoId) {
         boolean deleted = memoService.deleteMemoById(memoId);
         return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
@@ -73,9 +73,10 @@ public class MemoController {
 
         MemoDateResponse response = new MemoDateResponse(todayMemos, yesterdayMemos, last30DaysMemos);
         return ResponseEntity.ok(response);
+        // todayMemos, yesterdayMemos, last30DaysMemos 각각의 dto 리스트를 반환
     }
 
-    // 메모 검색 (제목이나 내용으로)
+    // 메모 검색 (제목이나 내용으로), 해당 하는 메모 DTO만 리스트에 담아 반환
     @GetMapping("/search")
     public ResponseEntity<List<MemoDTO>> searchMemos(@RequestParam String keyword) {
         List<MemoDTO> memos = memoService.getAllMemos().stream()
@@ -84,7 +85,7 @@ public class MemoController {
         return ResponseEntity.ok(memos);
     }
 
-    // 날짜별 메모 응답 DTO
+    // 날짜별 메모 응답
     private static class MemoDateResponse {
         private List<MemoDTO> todayMemos;
         private List<MemoDTO> yesterdayMemos;
@@ -95,7 +96,6 @@ public class MemoController {
             this.yesterdayMemos = yesterdayMemos;
             this.last30DaysMemos = last30DaysMemos;
         }
-
         // Getters, Setters 생략 (필요시 추가)
     }
 }

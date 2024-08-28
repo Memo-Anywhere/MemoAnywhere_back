@@ -18,18 +18,19 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-
     @PostMapping("/create")
-    public UserDTO createUser(@RequestParam("email") String userEmail,
-                              @RequestParam("nick_name") String userNickname) {
+    public UserDTO createUser(@RequestParam("nick_name") String userNickname) {
         return userService.createUser(userNickname);
     }
 
     @PostMapping("/update")
     public UserDTO updateUser(@RequestParam("id") Long userId,
-                              @RequestParam("email") String userEmail,
                               @RequestParam("nick_name") String userNickname) {
         return userService.updateUser(userId, userNickname);
     }
 
+    @PostMapping("/nicknames")
+    public List<String> getNicknamesByUserIds(@RequestBody List<Long> userIds) {
+        return userService.getNicknamesByUserIds(userIds);
+    }
 }
