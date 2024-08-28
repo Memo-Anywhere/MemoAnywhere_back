@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface CalendarEventRepository extends JpaRepository<CalendarEvent, Long> {
-
+    List<CalendarEvent> findByGroupId(Long groupId);
 }

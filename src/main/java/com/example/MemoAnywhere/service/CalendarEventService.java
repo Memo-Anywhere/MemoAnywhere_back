@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -50,11 +52,18 @@ public class CalendarEventService {
         }
     }
 
-    public CalendarEventDTO getEventById(Long eventId) {   // 일정 정보 가져오기
-        System.out.println("id: " + eventId);
-        Optional<CalendarEvent> event = eventRepository.findById(eventId);
-        System.out.println("user: " + event.get());
-        return event.isPresent() ? CalendarEventDTO.of(event.get()) : null;
+//    public CalendarEventDTO getEventById(Long eventId) {   // 일정 정보 가져오기 (하나만)
+//        System.out.println("id: " + eventId);
+//        Optional<CalendarEvent> event = eventRepository.findById(eventId);
+//        System.out.println("user: " + event.get());
+//        return event.isPresent() ? CalendarEventDTO.of(event.get()) : null;
+//    }
+    // 일정 하나만 독단적으로 반환할 일은 없을 것으로 예상
+
+    public List<CalendarEventDTO> getEventsByGroupId(Long groupId) {    // 특정 그룹의 모든 일정 조회
+        return eventRepository.findByGroupId(groupId).stream()
+                .map(CalendarEventDTO::of)  // CalendarEvent -> CalendarEventDTO로 변환
+                .collect(Collectors.toList());
     }
 
     public boolean deleteEventById(Long eventId) {    // 일정 삭제하기
@@ -65,5 +74,11 @@ public class CalendarEventService {
         } else {
             return false;
         }
+    }
+
+    public List<CalendarEventDTO> getAllEvents() {  // 모든 일정 가져오기
+        return eventRepository.findAll().stream()
+                .map(CalendarEventDTO::of)  // CalendarEvent -> CalendarEventDTO로 변환
+                .collect(Collectors.toList());
     }
 }
